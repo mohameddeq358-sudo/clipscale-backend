@@ -1,3 +1,4 @@
+import yt_dlp
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 
@@ -25,3 +26,10 @@ async def process_video(request: ClipRequest, background_tasks: BackgroundTasks)
 
 def run_video_pipeline(url: str):
     print(f"Processing video from: {url}")
+    ydl_opts = {
+        'format': 'best',
+        'outtmpl': 'downloads/%(id)s.%(ext)s',
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    print("Video download completed successfully.")
