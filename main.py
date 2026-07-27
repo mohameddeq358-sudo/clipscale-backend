@@ -1,3 +1,4 @@
+import os
 import yt_dlp
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from pydantic import BaseModel
